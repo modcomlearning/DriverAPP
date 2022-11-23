@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyDriver</string>
+    <string name="hintEmail">Enter your Email</string>
+    <string name="hintPassword">Enter your Password</string>
+    <string name="loginButtonText">Login Now</string>
+    <string name="appheading">My Driver</string>
+    <string name="title_activity_driver_main">DriverMain</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>
