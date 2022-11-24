@@ -1,6 +1,8 @@
 package com.example.myapplication.services
 
 import com.example.myapplication.interfaces.RestApi
+import com.example.myapplication.models.DriverPost
+import com.example.myapplication.models.DriverResp
 import com.example.myapplication.models.LoginResp
 import com.example.myapplication.models.UserInfo
 import retrofit2.Call
@@ -19,6 +21,23 @@ class RestApiService {
                 override fun onResponse( call: Call<LoginResp>, response: Response<LoginResp>) {
                     //val code = response.code()
                    // println(""+response.body())
+                    onResult(response.body())
+
+                }
+            }
+        )
+    }//End
+    fun getAssignments(driverPost: DriverPost, onResult: (DriverResp?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.myassignments(driverPost).enqueue(
+            object : Callback<DriverResp> {
+                override fun onFailure(call: Call<DriverResp>, t: Throwable) {
+                    println("Eroooooooooooooooo"+t.message)
+                    onResult(null)
+                }
+                override fun onResponse( call: Call<DriverResp>, response: Response<DriverResp>) {
+                    //val code = response.code()
+                    // println(""+response.body())
                     onResult(response.body())
 
                 }

@@ -1,5 +1,7 @@
 package com.example.myapplication.interfaces
 
+import com.example.myapplication.models.DriverPost
+import com.example.myapplication.models.DriverResp
 import com.example.myapplication.models.LoginResp
 import com.example.myapplication.models.UserInfo
 import okhttp3.ResponseBody
@@ -13,4 +15,7 @@ interface RestApi {
     fun addUser(@Body userData: UserInfo): Call<LoginResp>
 
 
+    @Headers("Content-Type: application/json")
+    @POST("myassignments")
+    fun myassignments(@Body driverPost: DriverPost): Call<DriverResp>
 }
