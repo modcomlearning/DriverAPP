@@ -27,6 +27,7 @@ class RestApiService {
             }
         )
     }//End
+    //We will use this in our recycler View
     fun getAssignments(driverPost: DriverPost, onResult: (DriverResp?) -> Unit){
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
         retrofit.myassignments(driverPost).enqueue(
