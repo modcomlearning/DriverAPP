@@ -1,10 +1,7 @@
 package com.example.myapplication.services
 
 import com.example.myapplication.interfaces.RestApi
-import com.example.myapplication.models.DriverPost
-import com.example.myapplication.models.DriverResp
-import com.example.myapplication.models.LoginResp
-import com.example.myapplication.models.UserInfo
+import com.example.myapplication.models.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +17,7 @@ class RestApiService {
                 }
                 override fun onResponse( call: Call<LoginResp>, response: Response<LoginResp>) {
                     //val code = response.code()
-                   // println(""+response.body())
+                    println(""+response.body())
                     onResult(response.body())
 
                 }
@@ -38,7 +35,27 @@ class RestApiService {
                 }
                 override fun onResponse( call: Call<DriverResp>, response: Response<DriverResp>) {
                     //val code = response.code()
-                    // println(""+response.body())
+                    println("ttttttttttttttt"+response.body())
+                    onResult(response.body())
+
+                }
+            }
+        )
+    }
+
+
+    //We will use this in our recycler View
+    fun Trip_Ongoing(taskPost: TaskPost, onResult: (TaskResp?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.TripOngoing(taskPost).enqueue(
+            object : Callback<TaskResp> {
+                override fun onFailure(call: Call<TaskResp>, t: Throwable) {
+                    println("Eroooooooooooooooo"+t.message)
+                    onResult(null)
+                }
+                override fun onResponse( call: Call<TaskResp>, response: Response<TaskResp>) {
+                    //val code = response.code()
+                    println("ttttttttttttttt"+response.body())
                     onResult(response.body())
 
                 }

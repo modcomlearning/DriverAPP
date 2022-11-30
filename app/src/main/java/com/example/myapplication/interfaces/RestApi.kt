@@ -1,14 +1,13 @@
 package com.example.myapplication.interfaces
 
-import com.example.myapplication.models.DriverPost
-import com.example.myapplication.models.DriverResp
-import com.example.myapplication.models.LoginResp
-import com.example.myapplication.models.UserInfo
+import com.example.myapplication.models.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.PUT
+
 interface RestApi {
     @Headers("Content-Type: application/json")
     @POST("login")
@@ -18,4 +17,8 @@ interface RestApi {
     @Headers("Content-Type: application/json")
     @POST("myassignments")
     fun myassignments(@Body driverPost: DriverPost): Call<DriverResp>
+
+    @Headers("Content-Type: application/json")
+    @PUT("TripOngoing")
+    fun TripOngoing(@Body taskPost: TaskPost): Call<TaskResp>
 }

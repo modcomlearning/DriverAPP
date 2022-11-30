@@ -59,6 +59,30 @@
                 android:text="2022-02-02 12.30 PM"/>
         </LinearLayout>
 
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:text="Status"/>
+
+
+              <com.google.android.material.button.MaterialButton
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="Start Trip"
+                  android:id="@+id/btnDoAction"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
