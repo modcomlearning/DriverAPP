@@ -24,6 +24,29 @@ class RestApiService {
             }
         )
     }//End
+
+    fun changepassword(passwordPost: PasswordPost, onResult: (TaskResp?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.change_password(passwordPost).enqueue(
+            object : Callback<TaskResp> {
+                override fun onFailure(call: Call<TaskResp>, t: Throwable) {
+                    println("Eroooooooooooooooo"+t.message)
+                    onResult(null)
+                }
+                override fun onResponse( call: Call<TaskResp>, response: Response<TaskResp>) {
+                    //val code = response.code()
+                    println(""+response.body())
+                    onResult(response.body())
+
+                }
+            }
+        )
+    }//End
+
+
+
+
+
     //We will use this in our recycler View
     fun getAssignments(driverPost: DriverPost, onResult: (DriverResp?) -> Unit){
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
@@ -62,4 +85,24 @@ class RestApiService {
             }
         )
     }
+
+
+    fun Trip_Completed(taskPost: TaskPost, onResult: (TaskResp?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.TripCompleted(taskPost).enqueue(
+            object : Callback<TaskResp> {
+                override fun onFailure(call: Call<TaskResp>, t: Throwable) {
+                    println("Eroooooooooooooooo"+t.message)
+                    onResult(null)
+                }
+                override fun onResponse( call: Call<TaskResp>, response: Response<TaskResp>) {
+                    //val code = response.code()
+                    println("ttttttttttttttt"+response.body())
+                    onResult(response.body())
+
+                }
+            }
+        )
+    }
+
 }

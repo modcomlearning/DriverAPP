@@ -48,24 +48,43 @@ class RecyclerAdapter(var context: Context)://When you want to toast smthg witho
             btnDoAction.text = "COMPLETE TRIP"
             btnDoAction.setBackgroundColor(Color.parseColor("#ffca28"))
         }
-
         if(item.trip_complete_status == "Completed"){
             btnDoAction.text = "TRIP COMPLETED"
             btnDoAction.setBackgroundColor(Color.parseColor("#2e7d32"))
         }
         btnDoAction.setOnClickListener{
             //We set a Interface, Retrofit===========
-            val apiService = RestApiService()
-            val task = TaskPost(taskId = item.task_id)
-            apiService.Trip_Ongoing(task) {
-                Toast.makeText(context, "${it!!.userMsg}", Toast.LENGTH_SHORT).show()
+            if(item.trip_complete_status == "Pending") {
+                val apiService = RestApiService()
+                val task = TaskPost(taskId = item.task_id)
+                apiService.Trip_Ongoing(task) {
+                    Toast.makeText(context, "${it!!.userMsg}", Toast.LENGTH_SHORT).show()
                     val x = Intent(context, DriverMain::class.java)
                     x.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     context.startActivity(x)
-            }
+                }//end ongoing
+            }//end if
+            else if(item.trip_complete_status == "Ongoing") {
+                val apiService = RestApiService()
+                val task = TaskPost(taskId = item.task_id)
+                apiService.Trip_Completed(task) {
+                    Toast.makeText(context, "${it!!.userMsg}", Toast.LENGTH_SHORT).show()
+                    val x = Intent(context, DriverMain::class.java)
+                    x.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    context.startActivity(x)
+                }//end ongoing
+            }//end if
+            else {  btnDoAction.isEnabled = false  }
+
+
+
+
+
+
+
+
+
         }
-
-
     }
     override fun getItemCount(): Int {
         return productList.size

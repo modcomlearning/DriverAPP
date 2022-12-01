@@ -13,6 +13,10 @@ interface RestApi {
     @POST("login")
     fun addUser(@Body userData: UserInfo): Call<LoginResp>
 
+    @Headers("Content-Type: application/json")
+    @POST("change_password")
+    fun change_password(@Body passwordPost: PasswordPost): Call<TaskResp>
+
 
     @Headers("Content-Type: application/json")
     @POST("myassignments")
@@ -21,4 +25,11 @@ interface RestApi {
     @Headers("Content-Type: application/json")
     @PUT("TripOngoing")
     fun TripOngoing(@Body taskPost: TaskPost): Call<TaskResp>
+
+    @Headers("Content-Type: application/json")
+    @PUT("TripCompleted")
+    fun TripCompleted(@Body taskPost: TaskPost): Call<TaskResp>
+
+
+
 }
