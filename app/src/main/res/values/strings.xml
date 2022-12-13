@@ -6,6 +6,6 @@
     <string name="appheading">My Driver</string>
     <string name="title_activity_driver_main">DriverMain</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Services</string>
     <string name="title_notifications">Settings</string>
 </resources>

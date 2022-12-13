@@ -66,7 +66,7 @@ class NotificationsFragment : Fragment() {
                     editor.remove("password")
                     editor.apply()
                 }
-            }
+            } //https://github.com/modcomlearning/driverAPP
 
         }//end onclick
         return root

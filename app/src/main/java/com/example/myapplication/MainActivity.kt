@@ -14,9 +14,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+
+
+    companion object {
+        lateinit var mainActivity: MainActivity
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mainActivity = this
 
         val prefs = getSharedPreferences("storage", MODE_PRIVATE)
         val emailP = prefs.getString("email", "")
@@ -42,31 +50,33 @@ class MainActivity : AppCompatActivity() {
 
         apiService.addUser(userInfo) {
             progress.visibility = View.GONE
-            println("This one ${it!!.userData}")
-            println("This one ${it.userMsg}")
-            println("This one ${it.userToken}")
-
-            if(it.userToken == null){
-                Toast.makeText(applicationContext, "${it.userMsg}", Toast.LENGTH_SHORT).show()
+            if(it ==null){
+                Toast.makeText(applicationContext, "Connection Error", Toast.LENGTH_SHORT).show()
             }
+            else {
+                println("This one ${it!!.userData}")
+                println("This one ${it.userMsg}")
+                println("This one ${it.userToken}")
 
-            else{
-                //Shared prefs
-                val prefs = getSharedPreferences("storage", MODE_PRIVATE)
-                val editor = prefs.edit()
-                editor.putString("Token",it.userToken)
-                editor.putString("userData",it.userData.toString())
-                editor.putString("email",email)
-                editor.putString("password",password)
-                editor.apply()
+                if (it.userToken == null) {
+                    Toast.makeText(applicationContext, "${it.userMsg}", Toast.LENGTH_SHORT).show()
+                } else {
+                    //Shared prefs
+                    val prefs = getSharedPreferences("storage", MODE_PRIVATE)
+                    val editor = prefs.edit()
+                    editor.putString("Token", it.userToken)
+                    editor.putString("userData", it.userData.toString())
+                    editor.putString("email", email)
+                    editor.putString("password", password)
+                    editor.apply()
 
-                //We Now navigate to Main menu
-                val intent = Intent(applicationContext, DriverMain::class.java)
-                startActivity(intent)
-                finish()
-                Toast.makeText(applicationContext, "${it.userMsg}", Toast.LENGTH_SHORT).show()
+                    //We Now navigate to Main menu
+                    val intent = Intent(applicationContext, DriverMain::class.java)
+                    startActivity(intent)
+                    finish()
+                    Toast.makeText(applicationContext, "${it.userMsg}", Toast.LENGTH_SHORT).show()
+                }
             }
-
 
         }
     }

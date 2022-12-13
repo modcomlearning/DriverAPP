@@ -8,7 +8,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 class RestApiService {
     fun addUser(userData: UserInfo, onResult: (LoginResp?) -> Unit){
-        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        val retrofit = ServiceBuilderLogin.buildService(RestApi::class.java)
         retrofit.addUser(userData).enqueue(
             object : Callback<LoginResp> {
                 override fun onFailure(call: Call<LoginResp>, t: Throwable) {
@@ -65,6 +65,26 @@ class RestApiService {
             }
         )
     }
+
+
+    fun getServices(driverPost: DriverPost, onResult: (DriverResp?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.myservices(driverPost).enqueue(
+            object : Callback<DriverResp> {
+                override fun onFailure(call: Call<DriverResp>, t: Throwable) {
+                    println("Eroooooooooooooooo"+t.message)
+                    onResult(null)
+                }
+                override fun onResponse( call: Call<DriverResp>, response: Response<DriverResp>) {
+                    //val code = response.code()
+                    println("ttttttttttttttt"+response.body())
+                    onResult(response.body())
+
+                }
+            }
+        )
+    }
+
 
 
     //We will use this in our recycler View

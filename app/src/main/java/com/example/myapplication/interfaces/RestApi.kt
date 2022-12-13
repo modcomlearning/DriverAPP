@@ -23,6 +23,11 @@ interface RestApi {
     fun myassignments(@Body driverPost: DriverPost): Call<DriverResp>
 
     @Headers("Content-Type: application/json")
+    @POST("myservices")
+    fun myservices(@Body driverPost: DriverPost): Call<DriverResp>
+
+
+    @Headers("Content-Type: application/json")
     @PUT("TripOngoing")
     fun TripOngoing(@Body taskPost: TaskPost): Call<TaskResp>
 
